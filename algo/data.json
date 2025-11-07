@@ -1,0 +1,142 @@
+[
+    {
+        "_id": "690e27b11382dfdac6c79b72",
+        "filename": "1_8N2511040#9000505119.pdf",
+        "invoice_no": "0001-",
+        "invoice_date": "19-02-25",
+        "gstin": "08AAECR2968P1ZL",
+        "vendor_name": "Jaisalmer Marriott Resort & Spa",
+        "total_amount": "18.880.00",
+        "parse_time_sec": 13.25
+    },
+    {
+        "_id": "690e27b21382dfdac6c79b73",
+        "filename": "1_8N2511040#9000519256.pdf",
+        "invoice_no": "0001-81513",
+        "invoice_date": "2019-02-25",
+        "gstin": "08AAECR2968P1ZL",
+        "vendor_name": "Jaisalmer Marriott Resort & Spa",
+        "total_amount": "INR 18,880.00",
+        "parse_time_sec": 13.29
+    },
+    {
+        "_id": "690e27b31382dfdac6c79b74",
+        "filename": "2_1N218B040#9000225404.pdf",
+        "invoice_no": "MDM17",
+        "invoice_date": "10/07/2025",
+        "gstin": "27EOGPS6458A1ZO",
+        "vendor_name": "MAHENDRA D MAIND",
+        "total_amount": "3540.00",
+        "parse_time_sec": 15.49
+    },
+    {
+        "_id": "690e27ba1382dfdac6c79b75",
+        "filename": "4_5O454N070#9000602095.pdf",
+        "invoice_no": null,
+        "invoice_date": null,
+        "gstin": null,
+        "vendor_name": null,
+        "total_amount": "2503170900391753069798",
+        "parse_time_sec": 8.39
+    },
+    {
+        "_id": "690e27bf1382dfdac6c79b76",
+        "filename": "2_7N2550040#9000603266.pdf",
+        "invoice_no": "MOM17",
+        "invoice_date": "24/06/2005",
+        "gstin": "27EOGPS6458A1ZO",
+        "vendor_name": "MAHENDRA O MAIND",
+        "total_amount": "3540.00",
+        "parse_time_sec": 13.54
+    },
+    {
+        "_id": "690e27c21382dfdac6c79b77",
+        "filename": "4_5O454N070#9000603933.pdf",
+        "invoice_no": null,
+        "invoice_date": null,
+        "gstin": null,
+        "vendor_name": null,
+        "total_amount": "2503170900391753069798",
+        "parse_time_sec": 14.79
+    },
+    {
+        "_id": "690e27de1382dfdac6c79b78",
+        "filename": "5_6P2270002#5001694814.pdf",
+        "invoice_no": "SDSL / 14 2025-26",
+        "invoice_date": "11.04.2025",
+        "gstin": "37GBGPC9017M1ZA",
+        "vendor_name": "SRI DWARAKA SAIS LOGISTICS",
+        "total_amount": "305543.04",
+        "parse_time_sec": 36.12
+    },
+    {
+        "_id": "690e27e11382dfdac6c79b79",
+        "filename": "6_8P1511002#5001288173.pdf",
+        "invoice_no": "ARVINAVAG2023010",
+        "invoice_date": "20-Jul-23",
+        "gstin": "27AARCA5051H1ZI",
+        "vendor_name": "ARVI NAVIGATION PVT. LTD.",
+        "total_amount": "5,900.00",
+        "parse_time_sec": 30.35
+    },
+    {
+        "_id": "690e27ea1382dfdac6c79b7a",
+        "filename": "6_8P1511002#5001345318.pdf",
+        "invoice_no": "ARVINAV/AG/2023-010",
+        "invoice_date": null,
+        "gstin": "27AARCA5051H121",
+        "vendor_name": null,
+        "total_amount": "5900.00",
+        "parse_time_sec": 11.38
+    },
+    {
+        "_id": "690e27fb1382dfdac6c79b7b",
+        "filename": "7_6N2200040#9000649830.pdf",
+        "invoice_no": "2425CAKE APRIL 30",
+        "invoice_date": "30/04/2024",
+        "gstin": "24AAGFH0100G4Z5",
+        "vendor_name": "THE FERN RESIDENCY MUNDRA",
+        "total_amount": "5720",
+        "parse_time_sec": 26.4
+    },
+    {
+        "_id": "690e27fe1382dfdac6c79b7c",
+        "filename": "7_6N2200040#9000603624.pdf",
+        "invoice_no": "2425CAKE 24",
+        "invoice_date": "30/04/2024",
+        "gstin": "24AAGFH0100G4Z5",
+        "vendor_name": "THE FERN RESIDENCY MUNDRA",
+        "total_amount": "5720",
+        "parse_time_sec": 29.74
+    },
+    {
+        "_id": "690e280d1382dfdac6c79b7d",
+        "filename": "8_7P2550002#5001464966.pdf",
+        "invoice_no": "JH-220-2022",
+        "invoice_date": null,
+        "gstin": "20AABCM80081120",
+        "vendor_name": "ADANI POWER LTD, RAIPUR TPP",
+        "total_amount": "44826.00",
+        "parse_time_sec": 35.49
+    },
+    {
+        "_id": "690e281b1382dfdac6c79b7e",
+        "filename": "9_3N2998040#9000582843.pdf",
+        "invoice_no": "IN24IB230069288",
+        "invoice_date": "17-Jan-2024",
+        "gstin": "24AAACT4050C1ZZ",
+        "vendor_name": "Thomas Cook India Ltd",
+        "total_amount": "6710.00",
+        "parse_time_sec": 29.44
+    },
+    {
+        "_id": "690e281d1382dfdac6c79b7f",
+        "filename": "9_7N2590040#9000552848.pdf",
+        "invoice_no": "IN24IB23006928",
+        "invoice_date": "17-Jan-2024",
+        "gstin": "24AAACT4050C1ZZ",
+        "vendor_name": "Thomas Cook India Ltd",
+        "total_amount": "6710.00",
+        "parse_time_sec": 15.86
+    }
+]
