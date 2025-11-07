@@ -1,0 +1,148 @@
+[
+  {
+    "filename": "3P1344001#5001844533.pdf",
+    "invoice_no": "W/25-26/JUL-504",
+    "invoice_date": "2025-07-15",
+    "gstin": "27AADFM5366N12R",
+    "vendor_name": "<a id='69963db4-834f-493c-aad4-8e66df543beb'></a>",
+    "total_amount": "5841.00",
+    "taxable_amount": "5841",
+    "cgst": 5,
+    "sgst": 5,
+    "igst": 5,
+    "total_tax": null,
+    "irn": "b5aa5f908add200a84ad085c692670240fe1cd164",
+    "po_number": null,
+    "booking_number": null,
+    "ack_no": "122527633306206",
+    "items": [
+      {
+        "hsn": "85389000",
+        "amount": "4950.00"
+      },
+      {
+        "hsn": "08331579",
+        "amount": "971"
+      }
+    ],
+    "top_items": [
+      {
+        "hsn": "85389000",
+        "amount": "4950.00"
+      },
+      {
+        "hsn": "08331579",
+        "amount": "971"
+      }
+    ],
+    "items_signature": "475415431120b42cf14f5fd0f5a08a7212219901468585731e72708c4381423c",
+    "handwritten_annotations": [
+      {
+        "chunk_id": "69963db4-834f-493c-aad4-8e66df543beb",
+        "text": "Confirmation italo"
+      }
+    ],
+    "image_hash": "43fde424b0026748064ea1790608dda1",
+    "parse_time_sec": 42.66,
+    "needs_review": false,
+    "notes": []
+  }
+,
+  {
+    "filename": "3P1344001#5001844533.pdf",
+    "invoice_no": "W/25-26/JUL-504",
+    "invoice_date": "2025-07-15",
+    "gstin": "27AADFM5366N12R",
+    "vendor_name": "<a id='69963db4-834f-493c-aad4-8e66df543beb'></a>",
+    "total_amount": "5841.00",
+    "taxable_amount": "5841",
+    "cgst": null,
+    "sgst": null,
+    "igst": null,
+    "total_tax": null,
+    "irn": "b5aa5f908add200a84ad085c692670240fe1cd164",
+    "po_number": null,
+    "booking_number": null,
+    "ack_no": "122527633306206",
+    "items": [
+      {
+        "hsn": "85389000",
+        "amount": "4950.00"
+      },
+      {
+        "hsn": "08331579",
+        "amount": "971"
+      }
+    ],
+    "top_items": [
+      {
+        "hsn": "85389000",
+        "amount": "4950.00"
+      },
+      {
+        "hsn": "08331579",
+        "amount": "971"
+      }
+    ],
+    "items_signature": "475415431120b42cf14f5fd0f5a08a7212219901468585731e72708c4381423c",
+    "handwritten_annotations": [
+      {
+        "chunk_id": "69963db4-834f-493c-aad4-8e66df543beb",
+        "text": "Confirmation italo"
+      }
+    ],
+    "image_hash": "43fde424b0026748064ea1790608dda1",
+    "parse_time_sec": 42.66,
+    "needs_review": false,
+    "notes": []
+  }
+  ,
+  {
+    "filename": "3P1344001#5001844533.pdf",
+    "invoice_no": "W/25-26/JUL-504",
+    "invoice_date": "2025-07-15",
+    "gstin": "27AADFM5366N12R",
+    "vendor_name": "<a id='69963db4-834f-493c-aad4-8e66df543beb'></a>",
+    "total_amount": "5841.00",
+    "taxable_amount": "8052.56",
+    "cgst": 18,
+    "sgst": 18,
+    "igst": 0,
+    "total_tax": null,
+    "irn": "b5aa5f908add200a84ad085c692670240fe1cd164",
+    "po_number": null,
+    "booking_number": null,
+    "ack_no": "122527633306206",
+    "items": [
+      {
+        "hsn": "392610",
+        "amount": "4950.00"
+      },
+      {
+        "hsn": "392610",
+        "amount": "971"
+      }
+    ],
+    "top_items": [
+      {
+        "hsn": "392610",
+        "amount": "4950.00"
+      },
+      {
+        "hsn": "392610",
+        "amount": "971"
+      }
+    ],
+    "items_signature": "475415431120b42cf14f5fd0f5a08a7212219901468585731e72708c4381423c",
+    "handwritten_annotations": [
+      {
+        "chunk_id": "69963db4-834f-493c-aad4-8e66df543beb",
+        "text": "Confirmation italo"
+      }
+    ],
+    "image_hash": "43fde424b0026748064ea1790608dda1",
+    "parse_time_sec": 42.66,
+    "needs_review": false,
+    "notes": []
+  }
+]

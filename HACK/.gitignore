@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+invoice_results.json
+invoice_results.csv
+*__md_temp.md
