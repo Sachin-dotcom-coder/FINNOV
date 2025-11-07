@@ -1,0 +1,164 @@
+[
+  {
+    "filename": "3P1507001#5001867284.pdf",
+    "invoice_no": "e-Way",
+    "invoice_date": "2025-10-13",
+    "gstin": "320MATER1A1C0DE",
+    "vendor_name": "<a id='2243e0e2-7301-4c90-8951-ecc20633e7bf'></a>",
+    "total_amount": "85585.40",
+    "taxable_amount": null,
+    "cgst_percentage": null,
+    "cgst_amount": null,
+    "sgst_percentage": null,
+    "sgst_amount": null,
+    "igst_percentage": null,
+    "igst_amount": null,
+    "total_tax": null,
+    "irn": "657ed871dd085c3ea3421cc4f4e90ee4aacb3b5b6",
+    "po_number": "WER",
+    "booking_number": null,
+    "ack_no": "112527184992296",
+    "items": [
+      {
+        "hsn": "85444999",
+        "taxable_amount": "72530.00",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 72530.0
+      },
+      {
+        "hsn": "560094",
+        "taxable_amount": "4.20",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 4.2
+      },
+      {
+        "hsn": "2021",
+        "taxable_amount": "4.20",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 4.2
+      }
+    ],
+    "top_items": [
+      {
+        "hsn": "85444999",
+        "taxable_amount": "72530.00",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 72530.0
+      },
+      {
+        "hsn": "560094",
+        "taxable_amount": "4.20",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 4.2
+      },
+      {
+        "hsn": "2021",
+        "taxable_amount": "4.20",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 4.2
+      }
+    ],
+    "items_signature": "5636c5bea9d075eae4f8eeb99c3fadb386042e86ecebe089b4d289d4fbe5e670",
+    "handwritten_annotations": [
+      {
+        "chunk_id": "1e4518d2-73f2-497e-8ea9-93c5f26009f0",
+        "text": "\"This is a Computer Generated Invoice\", \"IBD not done\", \"for shihir\""
+      }
+    ],
+    "image_hash": "b713ba886ca6ab9b8bbad0bc89649119",
+    "parse_time_sec": 12.38,
+    "needs_review": true,
+    "notes": [
+      "items sum does not match total (may be partial or noisy)"
+    ]
+  },
+  {
+    "filename": "3P1344001#5001844533.pdf",
+    "invoice_no": "W/25-26/JUL-504",
+    "invoice_date": "2025-07-15",
+    "gstin": "27AADFM5366N12R",
+    "vendor_name": "<a id='ad73b401-ce56-426c-9933-8bdf6bee92c8'></a>",
+    "total_amount": "5841.00",
+    "taxable_amount": null,
+    "cgst_percentage": null,
+    "cgst_amount": null,
+    "sgst_percentage": null,
+    "sgst_amount": null,
+    "igst_percentage": null,
+    "igst_amount": null,
+    "total_tax": null,
+    "irn": "b5aa5f908add200a84ad085c692670240fe1cd164",
+    "po_number": null,
+    "booking_number": null,
+    "ack_no": "122527633306206",
+    "items": [
+      {
+        "hsn": "85389000",
+        "taxable_amount": "4950.00",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 4950.0
+      }
+    ],
+    "top_items": [
+      {
+        "hsn": "85389000",
+        "taxable_amount": "4950.00",
+        "cgst_percentage": null,
+        "cgst_amount": null,
+        "sgst_percentage": null,
+        "sgst_amount": null,
+        "igst_percentage": null,
+        "igst_amount": null,
+        "val": 4950.0
+      }
+    ],
+    "items_signature": "e1b95f0f49cad4957788ef624acb135c456cd1bfe5bdfdb9cc44cde87b877558",
+    "handwritten_annotations": [
+      {
+        "chunk_id": "ad73b401-ce56-426c-9933-8bdf6bee92c8",
+        "text": "Confirmation italo"
+      }
+    ],
+    "image_hash": "43fde424b0026748064ea1790608dda1",
+    "parse_time_sec": 14.12,
+    "needs_review": true,
+    "notes": [
+      "items sum does not match total (may be partial or noisy)"
+    ]
+  }
+]
