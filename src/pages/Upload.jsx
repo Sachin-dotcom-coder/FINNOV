@@ -44,14 +44,14 @@ const UploadZone = ({ onUploadComplete }) => {
   });
 
   return (
-    <div className="w-full max-w-4xl mx-auto animate-float">
+    <div className="w-full max-w-4xl mx-auto">
       <div
         {...getRootProps()}
         className={`
           border-2 border-dashed rounded-xl p-12 text-center cursor-pointer transition-all duration-300
-          glass-panel hover-lift hover-glow
+          glass-panel
           ${isDragActive 
-            ? 'border-blue-400 bg-blue-500/10 animate-glow' 
+            ? 'border-blue-400 bg-blue-500/10' 
             : 'border-gray-600 hover:border-blue-400'
           }
           ${isUploading ? 'pointer-events-none' : ''}
@@ -70,7 +70,7 @@ const UploadZone = ({ onUploadComplete }) => {
               />
             </div>
             <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-white animate-pulse">
+              <h3 className="text-xl font-semibold text-white">
                 {uploadProgress < 100 ? 'Analyzing with AI...' : 'Analysis Complete!'}
               </h3>
               <div className="w-full bg-gray-600 rounded-full h-3 overflow-hidden">
@@ -103,17 +103,12 @@ const UploadZone = ({ onUploadComplete }) => {
                   <UploadIcon className="h-12 w-12 text-blue-400 transition-transform duration-300 hover:scale-110" />
                 )}
               </div>
-              {isDragActive && (
-                <div className="absolute -top-2 -right-2">
-                  <div className="w-6 h-6 bg-green-400 rounded-full animate-ping"></div>
-                </div>
-              )}
             </div>
             
             <div className="space-y-4">
               <h3 className="text-2xl font-semibold text-white transition-all duration-300">
                 {isDragActive ? (
-                  <span className="text-green-400 animate-pulse">Release to upload</span>
+                  <span className="text-green-400">Release to upload</span>
                 ) : (
                   'Upload Your Invoices'
                 )}
@@ -135,7 +130,7 @@ const UploadZone = ({ onUploadComplete }) => {
             </div>
 
             {!isDragActive && (
-              <button className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all duration-300 hover-lift hover-glow inline-flex items-center gap-2">
+              <button className="bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition-all duration-300 inline-flex items-center gap-2">
                 <UploadIcon className="h-4 w-4" />
                 Browse Files
               </button>
@@ -147,17 +142,17 @@ const UploadZone = ({ onUploadComplete }) => {
       {/* File type info cards */}
       {!isUploading && !isDragActive && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-          <div className="glass-panel rounded-lg p-4 text-center transition-all duration-300 hover-lift">
+          <div className="glass-panel rounded-lg p-4 text-center transition-all duration-300">
             <FileText className="h-8 w-8 text-blue-400 mx-auto mb-2" />
             <h4 className="text-white font-medium text-sm">PDF Documents</h4>
             <p className="text-gray-400 text-xs">Scanned or digital invoices</p>
           </div>
-          <div className="glass-panel rounded-lg p-4 text-center transition-all duration-300 hover-lift">
+          <div className="glass-panel rounded-lg p-4 text-center transition-all duration-300">
             <FileText className="h-8 w-8 text-green-400 mx-auto mb-2" />
             <h4 className="text-white font-medium text-sm">JPEG/PNG Images</h4>
             <p className="text-gray-400 text-xs">Photo of paper invoices</p>
           </div>
-          <div className="glass-panel rounded-lg p-4 text-center transition-all duration-300 hover-lift">
+          <div className="glass-panel rounded-lg p-4 text-center transition-all duration-300">
             <FileText className="h-8 w-8 text-purple-400 mx-auto mb-2" />
             <h4 className="text-white font-medium text-sm">TIFF Files</h4>
             <p className="text-gray-400 text-xs">High-quality scans</p>
@@ -168,14 +163,18 @@ const UploadZone = ({ onUploadComplete }) => {
   );
 };
 
-const Upload = ({ onUploadComplete }) => {
+const Upload = ({ onUploadComplete, isLoggedIn, onLogout }) => {
   return (
     <div className="min-h-screen gradient-dark">
-      <Header />
+      <Header 
+        isLoggedIn={isLoggedIn}
+        onLogin={() => {}} // Empty function since login is handled in modal
+        onLogout={onLogout}
+      />
       <main className="flex items-center justify-center min-h-[calc(100vh-80px)]">
         <div className="container mx-auto px-6 py-8">
           <div className="max-w-6xl mx-auto space-y-8">
-            <div className="text-center space-y-4 animate-fade-in">
+            <div className="text-center space-y-4">
               <h1 className="text-4xl md:text-5xl font-bold text-white">
                 AI-Powered{' '}
                 <span className="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
@@ -191,7 +190,7 @@ const Upload = ({ onUploadComplete }) => {
 
             {/* Features section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="glass-panel rounded-xl p-6 text-center transition-all duration-300 hover-lift animate-fade-in stagger-1">
+              <div className="glass-panel rounded-xl p-6 text-center transition-all duration-300">
                 <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <FileText className="h-6 w-6 text-blue-400" />
                 </div>
@@ -201,7 +200,7 @@ const Upload = ({ onUploadComplete }) => {
                 </p>
               </div>
               
-              <div className="glass-panel rounded-xl p-6 text-center transition-all duration-300 hover-lift animate-fade-in stagger-2">
+              <div className="glass-panel rounded-xl p-6 text-center transition-all duration-300">
                 <div className="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="h-6 w-6 text-green-400" />
                 </div>
@@ -211,7 +210,7 @@ const Upload = ({ onUploadComplete }) => {
                 </p>
               </div>
               
-              <div className="glass-panel rounded-xl p-6 text-center transition-all duration-300 hover-lift animate-fade-in stagger-3">
+              <div className="glass-panel rounded-xl p-6 text-center transition-all duration-300">
                 <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <Cloud className="h-6 w-6 text-purple-400" />
                 </div>

@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import NumbersBackground from '../components/NumbersBackground';
 import { FileText, ArrowRight, Sparkles } from 'lucide-react';
 
-const Hero = () => {
+const Hero = ({ isLoggedIn, onLogin, onLogout }) => {
   const navigate = useNavigate();
 
   return (
@@ -14,7 +14,11 @@ const Hero = () => {
       </div>
       
       <div className="relative z-10 flex-1 flex flex-col">
-        <Header />
+        <Header 
+          isLoggedIn={isLoggedIn}
+          onLogin={onLogin}
+          onLogout={onLogout}
+        />
         
         {/* Hero Content */}
         <div className="flex-1 flex items-center justify-center py-8">
