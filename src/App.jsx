@@ -5,29 +5,10 @@ import Upload from './pages/Upload';
 import Dashboard from './pages/Dashboard';
 import Review from './pages/Review';
 import Summary from './pages/Summary';
+import { API_URL, fetchInvoices } from './api/client';
 
 function App() {
-  const [invoices, setInvoices] = useState([
-    {
-      id: 'INV-2023-0452',
-      fileName: 'invoice_0452.pdf',
-      vendor: 'Global Supplies Inc.',
-      amount: 12450.00,
-      date: '2023-10-15',
-      status: 'pending',
-      anomalies: [
-        {
-          id: 'anom-1',
-          type: 'amount_mismatch',
-          priority: 'high',
-          description: 'Amount Mismatch',
-          details: 'Invoice total doesn\'t match purchase order amount. Difference: $1,250.00',
-          resolved: false
-        }
-      ],
-      uploadedAt: new Date()
-    }
-  ]);
+  const [invoices, setInvoices] = useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,6 +18,22 @@ function App() {
     if (savedLogin === 'true') {
       setIsLoggedIn(true);
     }
+  }, []);
+
+  // Load existing invoices from backend on mount
+  useEffect(() => {
+    (async () => {
+      try {
+        const { invoices: items } = await fetchInvoices();
+        setInvoices(items.map(inv => ({
+          ...inv,
+          fileUrl: inv.fileUrl?.startsWith('http') ? inv.fileUrl : `${API_URL}${inv.fileUrl || ''}`,
+          uploadedAt: inv.uploadedAt ? new Date(inv.uploadedAt) : new Date(),
+        })));
+      } catch (e) {
+        console.warn('Failed to prefetch invoices', e);
+      }
+    })();
   }, []);
 
   const handleLogin = () => {
@@ -49,35 +46,49 @@ function App() {
     localStorage.removeItem('isLoggedIn');
   };
 
-  const handleUploadComplete = (files) => {
-    const newInvoices = files.map((file, index) => ({
-      id: `INV-${Date.now()}-${index}`,
-      fileName: file.name,
-      file: file, // Store the actual file object
-      vendor: `Vendor ${index + 1}`,
-      amount: Math.random() * 10000 + 1000,
-      date: new Date().toISOString().split('T')[0],
-      status: 'pending',
-      anomalies: [
-        {
-          id: `anom-${Date.now()}-${index}-1`,
-          type: 'amount_mismatch',
-          priority: 'high',
-          description: 'Amount Mismatch',
-          details: 'Invoice total doesn\'t match purchase order amount',
-          resolved: false
-        },
-        {
-          id: `anom-${Date.now()}-${index}-2`,
-          type: 'date_validation',
-          priority: 'medium',
-          description: 'Date Validation',
-          details: 'Invoice date is more than 30 days old',
-          resolved: false
-        }
-      ],
-      uploadedAt: new Date(),
-    }));
+  const handleUploadComplete = (items) => {
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    // If items are Files (from local only flow), synthesize invoices
+    const looksLikeFile = typeof items[0]?.name === 'string' && items[0] instanceof File;
+
+    let newInvoices;
+    if (looksLikeFile) {
+      newInvoices = items.map((file, index) => ({
+        id: `INV-${Date.now()}-${index}`,
+        fileName: file.name,
+        file: file,
+        vendor: `Vendor ${index + 1}`,
+        amount: Math.random() * 10000 + 1000,
+        date: new Date().toISOString().split('T')[0],
+        status: 'pending',
+        anomalies: [
+          {
+            id: `anom-${Date.now()}-${index}-1`,
+            type: 'amount_mismatch',
+            priority: 'high',
+            description: 'Amount Mismatch',
+            details: "Invoice total doesn't match purchase order amount",
+            resolved: false
+          },
+          {
+            id: `anom-${Date.now()}-${index}-2`,
+            type: 'date_validation',
+            priority: 'medium',
+            description: 'Date Validation',
+            details: 'Invoice date is more than 30 days old',
+            resolved: false
+          }
+        ],
+        uploadedAt: new Date(),
+      }));
+    } else {
+      // Items are processed invoices from backend
+      newInvoices = items.map((inv) => ({
+        ...inv,
+        uploadedAt: inv.uploadedAt ? new Date(inv.uploadedAt) : new Date(),
+      }));
+    }
 
     setInvoices(prev => [...prev, ...newInvoices]);
   };

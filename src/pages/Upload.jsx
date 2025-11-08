@@ -3,6 +3,7 @@ import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { Upload as UploadIcon, Loader, CheckCircle2, Cloud, FileText } from 'lucide-react';
+import { analyzeInvoices } from '../api/client';
 
 const UploadZone = ({ onUploadComplete }) => {
   const [isUploading, setIsUploading] = useState(false);
@@ -12,26 +13,31 @@ const UploadZone = ({ onUploadComplete }) => {
   const onDrop = useCallback(async (acceptedFiles) => {
     if (acceptedFiles.length === 0) return;
 
-    setIsUploading(true);
-    setUploadProgress(0);
+    try {
+      setIsUploading(true);
+      setUploadProgress(10);
 
-    // Simulate upload progress
-    const progressInterval = setInterval(() => {
-      setUploadProgress(prev => {
-        if (prev >= 100) {
-          clearInterval(progressInterval);
-          return 100;
-        }
-        return prev + 10;
-      });
-    }, 200);
+      // Call backend to analyze
+      const { invoices: processed } = await analyzeInvoices(acceptedFiles);
 
-    // Simulate AI processing
-    setTimeout(() => {
-      clearInterval(progressInterval);
-      onUploadComplete(acceptedFiles);
+      // Attach local File object for preview support
+      const byName = Object.fromEntries(acceptedFiles.map(f => [f.name, f]));
+      const withFiles = processed.map((inv, idx) => ({
+        ...inv,
+        fileUrl: inv.fileUrl?.startsWith('http') ? inv.fileUrl : `${API_URL}${inv.fileUrl || ''}`,
+        file: byName[inv.fileName] || acceptedFiles[idx] || null,
+        uploadedAt: inv.uploadedAt ? new Date(inv.uploadedAt) : new Date(),
+      }));
+
+      setUploadProgress(100);
+      onUploadComplete(withFiles);
       navigate('/dashboard');
-    }, 2500);
+    } catch (err) {
+      console.error(err);
+      alert(`Upload failed: ${err.message}`);
+    } finally {
+      setIsUploading(false);
+    }
   }, [onUploadComplete, navigate]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({

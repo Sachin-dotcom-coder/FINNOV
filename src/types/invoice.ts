@@ -13,7 +13,7 @@ export interface Invoice {
   vendor: string;
   amount: number;
   date: string;
-  status: 'pending' | 'valid' | 'flagged';
+  status: 'pending' | 'verified' | 'flagged';
   anomalies: Anomaly[];
   uploadedAt: Date;
 }

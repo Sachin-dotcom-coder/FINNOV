@@ -7,7 +7,7 @@ const InvoiceTable = ({ invoices }) => {
   const getStatusIcon = (status, anomalies) => {
     const hasUnresolvedAnomalies = anomalies.some(a => !a.resolved);
     
-    if (status === 'valid') {
+    if (status === 'verified') {
       return <CheckCircle2 className="h-5 w-5 text-green-400" />;
     }
     
@@ -21,10 +21,10 @@ const InvoiceTable = ({ invoices }) => {
   const getStatusBadge = (status, anomalies) => {
     const hasUnresolvedAnomalies = anomalies.some(a => !a.resolved);
     
-    if (status === 'valid') {
+    if (status === 'verified') {
       return (
         <span className="px-3 py-1 rounded-full bg-green-400/20 text-green-400 text-xs font-medium border border-green-400/30">
-          Validated
+          Verified
         </span>
       );
     }

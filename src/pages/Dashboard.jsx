@@ -3,27 +3,58 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { SkeletonStats, SkeletonTableRow } from '../components/Skeletons';
 import { FileText, AlertTriangle, CheckCircle2, Clock, Upload, TrendingUp } from 'lucide-react';
+// Static summary data from extraction logic (no backend required)
+// If present, this will drive the dashboard counts and summary cards.
+import summary from '../../algo/data.json';
+import { useRef } from 'react';
 
 const Dashboard = ({ invoices }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState(null);
 
+  // Try to fetch the JSON at runtime as an asset as well, to avoid bundling issues
+  const hasFetched = useRef(false);
+  const [summaryData, setSummaryData] = useState(null);
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
+
+    if (!hasFetched.current) {
+      hasFetched.current = true;
+      try {
+const url = new URL('../../algo/data.json', import.meta.url);
+        fetch(url)
+          .then((r) => (r.ok ? r.json() : null))
+          .then((json) => {
+            if (json && typeof json === 'object') setSummaryData(json);
+          })
+          .catch(() => {});
+      } catch {}
+    }
+
     return () => clearTimeout(timer);
   }, []);
 
   const stats = useMemo(() => {
+    const src = summaryData || summary;
+    if (src && typeof src.total_invoices === 'number') {
+      const total = src.total_invoices || 0;
+      const valid = src.validated || 0;
+      const pending = Math.max(0, total - valid);
+      const totalAnomalies = src.total_anomalies || 0;
+      return { total, pending, valid, totalAnomalies };
+    }
+
+    // Fallback to computing from invoices prop
     const total = invoices.length;
     const pending = invoices.filter(inv => inv.status === 'pending').length;
-    const valid = invoices.filter(inv => inv.status === 'valid').length;
-    const totalAnomalies = invoices.reduce((sum, inv) => 
+    const valid = invoices.filter(inv => inv.status === 'verified').length;
+    const totalAnomalies = invoices.reduce((sum, inv) =>
       sum + inv.anomalies.filter(a => !a.resolved).length, 0
     );
 
     return { total, pending, valid, totalAnomalies };
-  }, [invoices]);
+  }, [invoices, summaryData]);
 
   const StatCard = ({ title, value, icon, trend, className = '', index }) => (
     <div 
@@ -109,6 +140,49 @@ const Dashboard = ({ invoices }) => {
               icon={<Clock className="h-5 w-5 text-yellow-400" />}
               index={3}
             />
+          </div>
+        )}
+
+        {/* Extraction summary cards from data.json (hsn/upi/other/duplicates) */}
+        {(summaryData || summary) && (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="glass-card rounded-xl p-6">
+              <h3 className="text-sm font-medium text-gray-400 mb-2">HSN Validation</h3>
+              <div className="space-y-1 text-white text-sm">
+                <div className="flex justify-between"><span>Missing both</span><span>{(summaryData||summary).hsn_validation?.missing_both ?? 0}</span></div>
+                <div className="flex justify-between"><span>HSN not found</span><span>{(summaryData||summary).hsn_validation?.hsn_not_found ?? 0}</span></div>
+                <div className="flex justify-between"><span>Filled from HSN</span><span>{(summaryData||summary).hsn_validation?.filled_from_hsn ?? 0}</span></div>
+                <div className="flex justify-between"><span>Nonstandard slab</span><span>{(summaryData||summary).hsn_validation?.nonstandard_slab ?? 0}</span></div>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-xl p-6">
+              <h3 className="text-sm font-medium text-gray-400 mb-2">UPI</h3>
+              <div className="space-y-1 text-white text-sm">
+                <div className="flex justify-between"><span>Docs found</span><span>{(summaryData||summary).upi?.docs_found ?? 0}</span></div>
+                <div className="flex justify-between"><span>Missing Txn ID</span><span>{(summaryData||summary).upi?.missing_txn_id ?? 0}</span></div>
+                <div className="flex justify-between"><span>Missing sender</span><span>{(summaryData||summary).upi?.missing_sender ?? 0}</span></div>
+                <div className="flex justify-between"><span>Amount mismatch</span><span>{(summaryData||summary).upi?.amount_mismatch ?? 0}</span></div>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-xl p-6">
+              <h3 className="text-sm font-medium text-gray-400 mb-2">Other Flags</h3>
+              <div className="space-y-1 text-white text-sm">
+                <div className="flex justify-between"><span>Missing GSTIN</span><span>{(summaryData||summary).other_flags?.missing_gstin ?? 0}</span></div>
+                <div className="flex justify-between"><span>Missing PAN</span><span>{(summaryData||summary).other_flags?.missing_pan ?? 0}</span></div>
+                <div className="flex justify-between"><span>Future dates</span><span>{(summaryData||summary).other_flags?.future_dates ?? 0}</span></div>
+                <div className="flex justify-between"><span>Low OCR</span><span>{(summaryData||summary).other_flags?.low_ocr ?? 0}</span></div>
+              </div>
+            </div>
+
+            <div className="glass-card rounded-xl p-6">
+              <h3 className="text-sm font-medium text-gray-400 mb-2">Duplicates</h3>
+              <div className="space-y-1 text-white text-sm">
+                <div className="flex justify-between"><span>Groups</span><span>{(summaryData||summary).duplicates_groups ?? 0}</span></div>
+                <div className="flex justify-between"><span>Total docs in groups</span><span>{(summaryData||summary).duplicates_total_docs_in_groups ?? 0}</span></div>
+              </div>
+            </div>
           </div>
         )}
 

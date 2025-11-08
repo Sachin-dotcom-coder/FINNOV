@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import { ArrowLeft, ZoomIn, ZoomOut, Download, CheckCircle, XCircle, AlertTriangle, FileText, Image, File } from 'lucide-react';
+import { API_URL, updateAnomaly } from '../api/client';
 
 const Review = ({ invoices, onUpdateInvoice, isLoggedIn, onLogout }) => {
   const { id } = useParams();
@@ -20,9 +21,12 @@ const Review = ({ invoices, onUpdateInvoice, isLoggedIn, onLogout }) => {
         setSelectedAnomaly(foundInvoice.anomalies[0]);
       }
       
-      // Create object URL for the actual file
+      // Prefer local File for preview, fall back to server URL
       if (foundInvoice.file) {
         const url = URL.createObjectURL(foundInvoice.file);
+        setDocumentUrl(url);
+      } else if (foundInvoice.fileUrl) {
+        const url = foundInvoice.fileUrl.startsWith('http') ? foundInvoice.fileUrl : `${API_URL}${foundInvoice.fileUrl}`;
         setDocumentUrl(url);
       }
     }
@@ -37,39 +41,49 @@ const Review = ({ invoices, onUpdateInvoice, isLoggedIn, onLogout }) => {
     };
   }, [documentUrl]);
 
-  const handleResolveAnomaly = (anomalyId) => {
+  const handleResolveAnomaly = async (anomalyId) => {
     if (!invoice) return;
 
-    const updatedAnomalies = invoice.anomalies.map(anom =>
-      anom.id === anomalyId ? { ...anom, resolved: true } : anom
-    );
-
-    const allResolved = updatedAnomalies.every(anom => anom.resolved);
-    const updatedInvoice = {
+    // Optimistic update
+    const optimistic = {
       ...invoice,
-      anomalies: updatedAnomalies,
-      status: allResolved ? 'verified' : 'pending'
+      anomalies: invoice.anomalies.map(a => a.id === anomalyId ? { ...a, resolved: true } : a),
     };
+    optimistic.status = optimistic.anomalies.every(a => a.resolved) ? 'verified' : 'pending';
+    setInvoice(optimistic);
+    onUpdateInvoice(invoice.id, optimistic);
 
-    setInvoice(updatedInvoice);
-    onUpdateInvoice(invoice.id, updatedInvoice);
+    try {
+      const { invoice: saved } = await updateAnomaly(invoice.id, anomalyId, true);
+      setInvoice(saved);
+      onUpdateInvoice(invoice.id, saved);
+    } catch (e) {
+      alert('Failed to update anomaly. Reverting.');
+      setInvoice(invoice);
+      onUpdateInvoice(invoice.id, invoice);
+    }
   };
 
-  const handleReopenAnomaly = (anomalyId) => {
+  const handleReopenAnomaly = async (anomalyId) => {
     if (!invoice) return;
 
-    const updatedAnomalies = invoice.anomalies.map(anom =>
-      anom.id === anomalyId ? { ...anom, resolved: false } : anom
-    );
-
-    const updatedInvoice = {
+    const optimistic = {
       ...invoice,
-      anomalies: updatedAnomalies,
+      anomalies: invoice.anomalies.map(a => a.id === anomalyId ? { ...a, resolved: false } : a),
       status: 'pending'
     };
+    setInvoice(optimistic);
+    onUpdateInvoice(invoice.id, optimistic);
 
-    setInvoice(updatedInvoice);
-    onUpdateInvoice(invoice.id, updatedInvoice);
+    try {
+      const { invoice: saved } = await updateAnomaly(invoice.id, anomalyId, false);
+      setInvoice(saved);
+      onUpdateInvoice(invoice.id, saved);
+    } catch (e) {
+      alert('Failed to update anomaly. Reverting.');
+      setInvoice(invoice);
+      onUpdateInvoice(invoice.id, invoice);
+    }
   };
 
   const getPriorityColor = (priority) => {
@@ -112,14 +126,15 @@ const Review = ({ invoices, onUpdateInvoice, isLoggedIn, onLogout }) => {
   };
 
   const handleDownload = () => {
-    if (documentUrl && invoice) {
-      const link = document.createElement('a');
-      link.href = documentUrl;
-      link.download = invoice.fileName;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
+    if (!invoice) return;
+    const url = invoice.id ? `${API_URL}/api/invoices/${invoice.id}/download` : documentUrl;
+    if (!url) return;
+    const link = document.createElement('a');
+    link.href = url;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const getFileIcon = (fileName) => {

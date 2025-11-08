@@ -1,0 +1,24 @@
+{
+  "name": "finnov-server",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "fintech-iii-gandhinagar": "file:..",
+    "mongoose": "^8.7.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.0.0",
+    "nanoid": "^5.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
