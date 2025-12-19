@@ -199,7 +199,7 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 
 ## 👥 Authors
 
-- **Your Name** - Project Lead & Developer
+- Sachin Saji , Shresth Shandilya , Tanishka Kumthekar, Adwaitha Sivaraj
 
 ## 📞 Contact & Support
 
